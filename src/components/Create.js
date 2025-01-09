@@ -102,18 +102,7 @@ function Create() {
                         required
                     />
                 </Form.Group>
-
-                {/* Fetching a value from input textfirld in a setage using usestate
-                <Form.Group className="mb-3" controlId="formBasicAge" >
-                    <Form.Control
-                        onChange={(e) =>
-                            setage(e.target.value)
-                        }
-                        type="number"
-                        placeholder="Age"
-                        required
-                    />
-                </Form.Group>*/}
+                 
 
                 {/* Fetching a value from input textfirld in a setage using usestate*/}
                 <Form.Group className="mb-3" controlId="formBirthDate"

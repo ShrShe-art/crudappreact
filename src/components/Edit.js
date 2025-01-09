@@ -50,6 +50,29 @@ function Edit() {
         history("/");
     };
 
+    const  handleChange_age = (e) => {
+        console.log("DOB:", e.target.value);
+        let d =e.target.value; 
+        setbirthdate(d);
+        d = calculate_age(d);
+         console.log(d);
+         //array.push({ Cage: d });
+         setage(d);
+      }
+ 
+      const calculate_age = (dob1) => {
+        var today = new Date();
+        var birthDate = new Date(dob1);  // create a date object directly from `dob1` argument
+        var age_now = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) 
+        {
+            age_now--;
+        }
+        console.log(age_now);
+        return age_now;
+      }
+
     // Useeffect take care that page will
     // be rendered only once
     useEffect(() => {
@@ -57,6 +80,13 @@ function Edit() {
         setage(localStorage.getItem("Age"));
         setid(localStorage.getItem("id"));
         setbirthdate(localStorage.getItem("Birthdate"));
+        const storedDate = localStorage.getItem("Birthdate"); // Example: "11-10-2002"
+        if (storedDate) {
+            // Parse to YYYY-MM-DD format
+            const [day, month, year] = storedDate.split("-"); // Change order based on your format
+            const formattedDate = `${year}-${month}-${day}`; // YYYY-MM-DD format
+            setbirthdate(formattedDate);
+        } 
         setemail(localStorage.getItem("Email"));
     }, []);
 
@@ -79,28 +109,13 @@ function Edit() {
                     />
                 </Form.Group>
 
-                {/* setting a age from the input textfiled */}
-                <Form.Group
-                    className="mb-3"
-                    controlId="formBasicPassword"
-                >
-                    <Form.Control
-                        value={age}
-                        onChange={(e) =>
-                            setage(e.target.value)
-                        }
-                        type="number"
-                        placeholder="Age"
-                    />
-                </Form.Group>
+                 
                 
                 {/* setting date  in date field*/}
                 <Form.Group  className="mb-3" controlId="formBirthDate" >
                     <Form.Control
                         value={birthdate}
-                        onChange={(e) =>
-                            setbirthdate(e.target.value)
-                        }
+                        onChange={handleChange_age}
                         type="date"
                         placeholder="Birth Date" 
                         dateFormat="dd-MM-yyyy"
@@ -128,13 +143,7 @@ function Edit() {
                     />
                 </Form.Group>
 
-               {/* <Form.Group  className="mb-3" controlId="formBdate"   >
-                    <Form.Control value={birthdate}  onChange={(e) =>
-                            setname(e.target.value)
-                        }
-                        type="text" placeholder="Enter Name"
-                    />
-                </Form.Group>*/}
+                
 
                 {/* Hadinling an onclick event 
                     running an edit logic */}

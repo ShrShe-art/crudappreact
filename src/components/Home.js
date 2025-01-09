@@ -35,7 +35,7 @@ function Home() {
 
     return (
         <div style={{ margin: "2rem" }}>
-            <h1 className="text-center mb-4">User Management</h1>
+            <h3 className="text-center mb-4">User Management</h3>
             <Table striped bordered hover responsive className="shadow-sm">
                 <thead className="thead-dark">
                     <tr>
